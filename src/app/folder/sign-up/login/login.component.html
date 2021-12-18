@@ -1,0 +1,21 @@
+<ion-content>
+<div class="login">
+    <img src="./assets/img/info.gif" alt="" class="logo" width="50%"><br/>
+    <img src="./assets/img/ams.png" alt="" class="logo1" width="40%">
+
+    <ion-item>
+        <ion-label position="floating">User Name</ion-label>
+        <ion-input type="text" [(ngModel)]="name" name="username"></ion-input>
+    </ion-item>
+      <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password" [(ngModel)]="pass" name="password"></ion-input>
+      </ion-item>
+      <div [style.color]="'red'">{{errMsg}}</div>
+      <ion-spinner *ngIf="showSpinner == true" color="secondary" name="circles"></ion-spinner>
+
+      <ion-button color="#006495" class="comp" expand="full" (click)="login()">Login</ion-button>
+      <h6 (click)="register()">Not Registered? Start here.</h6>
+
+</div>
+</ion-content>

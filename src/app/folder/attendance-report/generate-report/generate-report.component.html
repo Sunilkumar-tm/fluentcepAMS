@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar  class="toolBar">
+      <ion-buttons slot="start">
+          <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <!-- <ion-button class="btnHome" [routerLink]="'/settings'">
+            <i class="fas fa-arrow-left"></i> &nbsp;
+          </ion-button> -->
+      </ion-buttons>
+    <ion-title>Report</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">
+          <ion-item>
+              <ion-label position="floating">Start Date</ion-label>
+              <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="firstDay"  value="firstDay" name="firstDate" ngDefaultControl></ion-datetime>
+          </ion-item>         
+      </ion-col>
+      <ion-col size="4">
+          <ion-item>
+              <ion-label position="floating">End Date</ion-label>
+              <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="lastDay"  value="lastDay" name="lastDay"  ngDefaultControl></ion-datetime>
+          </ion-item>          
+      </ion-col>
+      <ion-col size="4">
+      <ion-button type="button" class="gen" color="#00aaa0" (click)="getReport()">GENERATE</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="tabHead">Total Spent: &nbsp; {{totalSpent}}</div>
+
+  <ion-grid>
+
+      <ion-row class="tabHead">
+        <ion-col>Date</ion-col> <ion-col>Time</ion-col> <ion-col>Status</ion-col> <ion-col>Spent</ion-col>
+      </ion-row>
+
+      <ion-row *ngFor="let ar of report | slice:0:slice">
+          <ion-col>
+            {{ar.date | date}}
+          </ion-col>
+          <ion-col>
+            {{ar.datetime |  date: 'shortTime'}}
+          </ion-col>
+          <ion-col>
+            {{ar.checkInOutString}}
+          </ion-col>
+          <ion-col>
+              {{ar.spent}}
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles"
+        loadingText="Loading more data…"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  
+</ion-content>

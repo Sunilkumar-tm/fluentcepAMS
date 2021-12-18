@@ -1,0 +1,72 @@
+<ion-header>
+    <ion-toolbar  class="toolBar">
+        <ion-buttons slot="start">
+            <ion-buttons slot="start">
+                <!-- <ion-menu-button></ion-menu-button> -->
+            </ion-buttons>
+            
+            <ion-button class="btnHome"  (click)="goBack()">
+              <i class="fas fa-arrow-left"></i> &nbsp;
+            </ion-button>
+        </ion-buttons>
+      <ion-title *ngIf="details">{{details.taskName}}</ion-title>
+
+      <!-- <button class="menuBtn"> -->
+          <ion-icon name="ellipsis-vertical" *ngIf=" details && details.statusString == 'Created'" class="menuBtn"   [style.color]="'white'"></ion-icon>
+          <!-- <ion-icon slot="icon-only" name="more" ></ion-icon> -->
+      <!-- </button> -->
+      
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+
+        <ion-spinner *ngIf="showSpinner == true" color="secondary" name="circles"></ion-spinner>
+
+      <ion-grid *ngIf="details && resonTab == false">
+
+          <ion-row class="tabHead">
+            <ion-col>Description : </ion-col> <ion-col>{{details.description}}</ion-col>
+          </ion-row>
+
+          <ion-row class="tabHead">
+              <ion-col>Job Duration : </ion-col> <ion-col>{{details.expectedStartDate | date}} - {{details.expectedEndDate | date}}</ion-col>
+          </ion-row>
+
+          <ion-row class="tabHead">
+              <ion-col>Status : </ion-col> <ion-col [ngStyle]="{'color': (details.statusString =='Created') ? '#3dc2ff' : '' || (details.statusString =='Completed') ? 'green' : '' || (details.statusString =='Accepted') ? '#e0ac08' : ''}">{{details.statusString}}</ion-col>
+          </ion-row>
+
+          <ion-row class="tabHead">
+              <ion-col>Priority : </ion-col> <ion-col>{{details.priorityString}}</ion-col>
+          </ion-row>
+
+          <ion-row class="tabHead">
+              <ion-col>Est.Time : </ion-col> <ion-col>{{details.expectedHours}}</ion-col>
+          </ion-row>
+
+          <ion-row class="tabHead">
+              <ion-col>Completed Date : </ion-col> <ion-col>{{details.endDate | date}}</ion-col>
+          </ion-row>
+
+          <ion-row class="tabHead">
+              <ion-col>Spent Time : </ion-col> <ion-col>{{totalSpent}}</ion-col>
+          </ion-row>
+
+    <div *ngIf="details.statusString == 'Created' || details.statusString == 'Reopen'">
+        <ion-button class="gen" color="#00aaa0" (click)="accept()">Accept</ion-button>
+        <ion-button class="gen" color="#00aaa0" (click)="rej()" >Reject</ion-button>
+    </div>
+      
+      </ion-grid>
+
+      <div class="top" *ngIf="resonTab == true">
+    
+          <ion-item>
+            <ion-label position="floating">Reason To Reject</ion-label>
+            <ion-input type="text" [(ngModel)]="reason" name="title"></ion-input>
+          </ion-item>
+    
+          <ion-button class="rejc" expand="full" color="#00aaa0" (click)="reasonToRej()">Reject</ion-button>
+      </div>
+
+  </ion-content>

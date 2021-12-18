@@ -1,0 +1,7 @@
+{
+  "name": "FluentMWM_CEPAMS",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

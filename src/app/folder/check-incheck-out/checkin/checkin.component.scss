@@ -1,0 +1,43 @@
+ion-header{
+    --ion-background-color: #006495 !important;
+  }
+  .dayDetails{
+    color: white;
+    text-align: center;
+    background: #006495;
+    padding: 2% 0px;
+    font-size: 0.9rem;
+  }
+  ion-title{
+    color:white !important;
+    text-transform: capitalize;
+  }
+  .fa-arrow-left{
+    color:white !important;
+
+  }
+  .btnGroup{
+      text-align: center;
+      padding:2% 0px;
+  }
+  .comp{
+    background: #006495;
+    margin:6% 0px;
+  }
+
+  .btnGroup > ion-button{
+      margin:2% 4%;
+      background: #00aaa0 !important;
+      color:white;
+  }
+  ion-menu-button{
+    color: white !important;
+  }
+
+  .menuBtn{
+    position: absolute;
+    bottom: 32%;
+    right: 3%;
+    background: none;
+    font-size: 23px;
+  }

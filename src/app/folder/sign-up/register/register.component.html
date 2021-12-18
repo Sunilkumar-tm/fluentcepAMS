@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-toolbar  class="toolBar">
+        <ion-buttons slot="start">
+            
+            <ion-button class="btnHome" (click)="arrow()">
+              <i class="fas fa-arrow-left"></i> &nbsp;
+            </ion-button>
+        </ion-buttons>
+      <ion-title>Register</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+  
+<div class="login">
+    <img src="./assets/img/info.gif" alt=""  width="30%">
+
+    <ion-item>
+        <ion-label>Select</ion-label>
+        <ion-select>
+          <ion-select-option value="ams">AMS</ion-select-option>
+          <ion-select-option value="tms">TMS</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label position="floating">User Name</ion-label>
+        <ion-input></ion-input>
+    </ion-item>
+
+      <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label position="floating">Email ID</ion-label>
+          <ion-input></ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label position="floating">Phone Number</ion-label>
+          <ion-input></ion-input>
+      </ion-item>
+
+      <ion-button color="#006495" class="comp" expand="full">Register</ion-button>
+</div>
+
+  
+  </ion-content>

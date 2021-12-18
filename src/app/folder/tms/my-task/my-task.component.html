@@ -1,0 +1,82 @@
+<ion-header>
+    <ion-toolbar  class="toolBar">
+        <ion-buttons slot="start">
+            <ion-buttons slot="start">
+                <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+            
+            <!-- <ion-button class="btnHome" *ngIf="enableRequest == true" (click)="goBack()">
+              <i class="fas fa-arrow-left"></i> &nbsp;
+            </ion-button> -->
+        </ion-buttons>
+      <ion-title>Tasks</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+
+    <ion-spinner *ngIf="showSpinner == true" color="secondary" name="circles"></ion-spinner>
+
+      <ion-grid>
+          <ion-row *ngIf="taskList">
+            <ion-col  [style.background]="'#3dc2ff'">
+              Assign: {{taskList.length}}
+            </ion-col>
+            <ion-col [style.background]="'#e0ac08'">
+              Accept: {{accepCount}}
+            </ion-col>
+            
+            <ion-col [style.background]="'#9d9fa6'">
+              ReOpen: {{reOpenCount}}
+            </ion-col>
+            
+          </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+            <ion-col [style.background]="'green'">
+                Completed: {{completCount}}
+            </ion-col>
+            <ion-col [style.background]="'#eb445a'">
+                Reject: {{rejectCount}}
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+  
+      <ion-list>
+  
+          <ion-item *ngFor="let l of taskList | slice:0:slice">
+            <ion-label (click)="goToDes(l.id, l.status, l.taskName)"> 
+              <h5 class="taskName">{{l.taskName}}</h5>
+              <h3 class="des">{{l.description}}</h3>
+              <h6 class="des">{{l.expectedStartDate | date }} - {{l.expectedEndDate | date }}</h6>
+            </ion-label>
+            <h6 [ngStyle]="{'color': (l.statusString =='Created') ? '#3dc2ff' : '' || (l.statusString =='Completed') ? 'green' : '' || (l.statusString =='Accepted') ? '#e0ac08' : ''}"> {{l.statusString}}</h6>
+          </ion-item>
+  
+        </ion-list>
+  
+    <!-- <div class="top" *ngIf="enableRequest == true">
+        <ion-item>
+          <ion-label>Start Date</ion-label>
+          <ion-datetime displayFormat="MMMM DD YYYY" [(ngModel)]="startDate" name="title" placeholder="Start Date"></ion-datetime>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label>End Date</ion-label>
+          <ion-datetime displayFormat="MMMM DD YYYY" [(ngModel)]="endDate" name="title" placeholder="End Date"></ion-datetime>
+        </ion-item>
+  
+        <ion-item>
+          <ion-label position="floating">Reason</ion-label>
+          <ion-input type="text" [(ngModel)]="reason" name="title"></ion-input>
+        </ion-item>
+  
+        <ion-button class="gen" color="#00aaa0" (click)="generate()">GENERATE</ion-button>
+    </div> -->
+  
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles"
+        loadingText="Loading more data…"></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  
+  </ion-content>

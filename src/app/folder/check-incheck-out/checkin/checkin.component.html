@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar  class="toolBar">
+      <ion-buttons slot="start">
+          <ion-buttons slot="start">
+              <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          <!-- <ion-button class="btnHome" [routerLink]="'/settings'">
+            <i class="fas fa-arrow-left"></i> &nbsp;
+          </ion-button> -->
+      </ion-buttons>
+    <ion-title *ngIf="type == 'AMS'">Attendance</ion-title>
+    <ion-title *ngIf="type == 'TMS'">{{tasknam}}</ion-title>
+
+    <!-- <ion-icon name="ellipsis-vertical" *ngIf="type == 'TMS'"  class="menuBtn" (click)="statusComplet()"  [style.color]="'white'"></ion-icon> -->
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  
+  <div class="dayDetails">
+    <h4>{{currentDay | date:'medium'}}</h4>
+    <p>Address: {{address}}</p>
+    <p *ngIf="checkInDay">Checked In @ {{checkInDay | date:'medium'}}</p>
+    <p *ngIf="checkoutDay">Checked Out @ {{checkoutDay | date:'medium'}}</p>
+  </div>
+
+  <div class="btnGroup">
+      <ion-button color="#00aaa0" [disabled]="enableCheckIn == false" (click)="checkIn()">&nbsp;CHECK IN&nbsp;</ion-button>
+      <ion-button color="#00aaa0" [disabled]="enableCheckOut == false" (click)="checkOut()">CHECK OUT</ion-button>
+  </div>
+  <agm-map style="height:500px" [zoom]='19' [latitude]="lat" [longitude]="lng">
+      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+    </agm-map>
+</ion-content>

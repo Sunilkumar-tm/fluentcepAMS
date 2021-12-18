@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar  class="toolBar">
+      <ion-buttons slot="start">
+          <ion-buttons slot="start" *ngIf="enableRequest == false">
+              <ion-menu-button></ion-menu-button>
+          </ion-buttons>
+          
+          <ion-button class="btnHome" *ngIf="enableRequest == true" (click)="goBack()">
+            <i class="fas fa-arrow-left"></i> &nbsp;
+          </ion-button>
+      </ion-buttons>
+    <ion-title *ngIf="enableRequest == false">Leaves</ion-title>
+    <ion-title *ngIf="enableRequest == true">Request Leave</ion-title>
+
+    <ion-buttons class="req" slot="end" (click)="leaveRequest()">
+      REQUEST
+  </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="enableRequest == false">
+    <ion-row>
+      <ion-col size="4">
+          <ion-item>
+              <ion-label position="floating">Start Date</ion-label>
+              <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="firstDay"  value="firstDay" name="firstDate" ngDefaultControl></ion-datetime>
+          </ion-item>         
+      </ion-col>
+      <ion-col size="4">
+          <ion-item>
+              <ion-label position="floating">End Date</ion-label>
+              <ion-datetime displayFormat="MMM DD YYYY" [(ngModel)]="lastDay"  value="lastDay" name="lastDay"  ngDefaultControl></ion-datetime>
+          </ion-item>          
+      </ion-col>
+      <ion-col size="4">
+      <ion-button type="button" class="gene" color="#00aaa0" (click)="getLeaves()">GENERATE</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+    <ion-list *ngIf="enableRequest == false">
+
+        <ion-item *ngFor="let l of leaveList | slice:0:slice">
+          <ion-label> 
+            <h5>{{l.reason}}</h5>
+            <h6>{{l.fromdate | date }} - {{l.todate | date }}</h6>
+          </ion-label>
+          <h6  [ngStyle]="{'color': (l.status == 0 ) ? '#eb445a' : ''}" *ngIf="l.status == 0"> Rejected</h6>
+          <h6 [ngStyle]="{'color': (l.status == 1 ) ? '#50c8ff' : ''}" *ngIf="l.status == 1">Active</h6>
+          <h6 [ngStyle]="{'color': (l.status == 2 ) ? '#28ba62' : ''}" *ngIf="l.status == 2">Approved</h6>
+
+        </ion-item>
+
+      </ion-list>
+
+  <div class="top" *ngIf="enableRequest == true">
+      <ion-item>
+        <ion-label>Start Date</ion-label>
+        <ion-datetime displayFormat="MMMM DD YYYY" [(ngModel)]="startDate" name="title" placeholder="Start Date"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>End Date</ion-label>
+        <ion-datetime displayFormat="MMMM DD YYYY" [(ngModel)]="endDate" name="title" placeholder="End Date"></ion-datetime>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Reason</ion-label>
+        <ion-input type="text" [(ngModel)]="reason" name="title"></ion-input>
+      </ion-item>
+
+      <ion-button class="gen" color="#00aaa0" (click)="generate()">GENERATE</ion-button>
+  </div>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles"
+      loadingText="Loading more data…"></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
